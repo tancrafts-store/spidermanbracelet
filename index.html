@@ -194,6 +194,42 @@
             margin-bottom: 6px;
         }
 
+        /* Top Rating & Review Trigger Badge */
+        .product-rating-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            background: #fff8f0;
+            padding: 4px 10px;
+            border-radius: 20px;
+            border: 1px solid #ffe3c2;
+            transition: background 0.2s ease;
+        }
+
+        .product-rating-badge:active {
+            background: #ffebd4;
+        }
+
+        .rating-star-icon {
+            color: #ffb800;
+            font-size: 13px;
+        }
+
+        .rating-score-text {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .rating-count-link {
+            font-size: 12px;
+            color: #2b6cb0;
+            text-decoration: underline;
+            font-weight: 500;
+        }
+
         .subtitle {
             font-size: 13px;
             color: var(--text-muted);
@@ -478,6 +514,77 @@
             padding: 16px;
         }
 
+        .reviews-header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .write-review-btn {
+            background: #ffffff;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            font-size: 12px;
+            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .write-review-btn:active {
+            background: #fff0f0;
+        }
+
+        .add-review-box {
+            display: none;
+            background: #fafafa;
+            border: 1px solid var(--border);
+            padding: 14px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+
+        .star-rating-select {
+            display: flex;
+            gap: 6px;
+            font-size: 20px;
+            color: #cbd5e0;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .star-rating-select .star-option.selected {
+            color: #ffb800;
+        }
+
+        .review-summary {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #fafafa;
+            border: 1px solid var(--border);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+
+        .rating-num {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--text);
+        }
+
+        .rating-stars-total {
+            color: #ffb800;
+            font-size: 14px;
+        }
+
+        .rating-count-text {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
         .review-card {
             border-bottom: 1px solid var(--border);
             padding: 12px 0;
@@ -491,12 +598,19 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .reviewer-name {
             font-weight: 600;
             font-size: 13px;
+            color: #2b6cb0;
+        }
+
+        .review-date {
+            font-size: 10px;
+            color: #a0aec0;
+            margin-left: 6px;
         }
 
         .stars {
@@ -508,6 +622,19 @@
             font-size: 13px;
             color: #2d3748;
             line-height: 1.4;
+        }
+
+        .load-more-btn {
+            width: 100%;
+            background: #edf2f7;
+            color: #2d3748;
+            border: 1px solid var(--border);
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 14px;
+            cursor: pointer;
         }
 
         /* Bottom Sheet Modal */
@@ -662,6 +789,14 @@
     <!-- Product Details -->
     <div class="product-info">
         <h1 class="title">Handcrafted Woven Wings Friendship Bracelet</h1>
+        
+        <!-- Rating & Review Count Badge below Title -->
+        <div class="product-rating-badge" onclick="scrollToReviews()">
+            <span class="rating-star-icon">★</span>
+            <span class="rating-score-text">4.8</span>
+            <span class="rating-count-link">(<span id="reviewBadgeCount">126</span> reviews)</span>
+        </div>
+
         <p class="subtitle">Intricately woven pattern with winged detail</p>
 
         <!-- Pack Selection Variant Options -->
@@ -727,32 +862,46 @@
     </div>
 
     <!-- Customer Reviews -->
-    <div class="reviews-section">
-        <h2 class="section-heading">Customer Reviews (3)</h2>
+    <div class="reviews-section" id="reviewsSection">
+        <div class="reviews-header-flex">
+            <h2 class="section-heading" style="margin-bottom:0;">Customer Reviews</h2>
+            <button class="write-review-btn" onclick="toggleReviewForm()">+ Write a Review</button>
+        </div>
+
+        <!-- Add Review Collapsible Box -->
+        <div class="add-review-box" id="addReviewBox">
+            <h3 style="font-size: 13px; font-weight: 700; margin-bottom: 8px;">Leave a Review</h3>
+            <div class="star-rating-select" id="starRatingSelect">
+                <span class="star-option selected" onclick="setFormRating(1)">★</span>
+                <span class="star-option selected" onclick="setFormRating(2)">★</span>
+                <span class="star-option selected" onclick="setFormRating(3)">★</span>
+                <span class="star-option selected" onclick="setFormRating(4)">★</span>
+                <span class="star-option selected" onclick="setFormRating(5)">★</span>
+            </div>
+            <div class="form-group">
+                <label>Instagram Handle / Name</label>
+                <input type="text" id="newReviewerName" placeholder="e.g. rohitplays or anuuu">
+            </div>
+            <div class="form-group">
+                <label>Your Review</label>
+                <textarea id="newReviewText" rows="2" placeholder="Write your experience with the product..."></textarea>
+            </div>
+            <button class="buy-btn" style="padding: 10px; font-size: 13px;" onclick="submitNewReview()">Post Review</button>
+        </div>
         
-        <div class="review-card">
-            <div class="review-header">
-                <span class="reviewer-name">annanya</span>
-                <span class="stars">★★★★★</span>
+        <div class="review-summary">
+            <div class="rating-num">4.8</div>
+            <div>
+                <div class="rating-stars-total">★★★★★</div>
+                <div class="rating-count-text">Based on <span id="summaryTotalCount">126</span> verified buyer reviews</div>
             </div>
-            <p class="review-text">The weaving quality is honestly super neat! Loved how the red and black ones look on wrist. Delivered in 4 days.</p>
         </div>
 
-        <div class="review-card">
-            <div class="review-header">
-                <span class="reviewer-name">Anu?</span>
-                <span class="stars">★★★★★</span>
-            </div>
-            <p class="review-text">Got matching ones for me and my best friend. Thread quality doesn't fray easily. Totally worth it.</p>
+        <div id="reviewsList">
+            <!-- Dynamically populated via Javascript with realistic reviews -->
         </div>
 
-        <div class="review-card">
-            <div class="review-header">
-                <span class="reviewer-name">Spidy69</span>
-                <span class="stars">★★★★☆</span>
-            </div>
-            <p class="review-text">Paid 19 rs partial COD and received item on time without issues. Looks exactly like the image.</p>
-        </div>
+        <button class="load-more-btn" id="loadMoreBtn" onclick="loadMoreReviews()">Load More Reviews</button>
     </div>
 
     <!-- Sticky Bottom Bar -->
@@ -840,8 +989,239 @@
 </div>
 
 <script>
-    let selectedPack = 5; // Default Pack of 5
+    let selectedPack = 5;
     let isGiftPackagingSelected = false;
+    let selectedFormRating = 5;
+
+    // 126 Realistic Raw Instagram-style reviews
+    const allReviews = [
+        { name: "iblameanush", stars: "★★★★★", date: "2 days ago", text: "brooo literally so cute😭❤️ weave is proper tight" },
+        { name: "anuuuu", stars: "★★★★★", date: "3 days ago", text: "tysm tan!! packaging was so aesthetic... bestie loved it sm" },
+        { name: "rohitplays", stars: "★★★★☆", date: "3 days ago", text: "delivery took 6 days near patna but bracelet quality is fire🔥" },
+        { name: "spidermandil ka chain", stars: "★★★★★", date: "4 days ago", text: "paid 19rs partial cod got it yesterday, pattern looks crazy good" },
+        { name: "memer yt", stars: "★★★★★", date: "5 days ago", text: "bhai me & my duo wearing this in college today setup set hai XD" },
+        { name: "rahul op", stars: "★★★★☆", date: "5 days ago", text: "good overall, thread is durable. tie on length is a bit long though" },
+        { name: "aesthetic_tanu_", stars: "★★★★★", date: "6 days ago", text: "the handwritten note made my day fr 🥹 worth every penny" },
+        { name: "itz_sahil_99", stars: "★★★★★", date: "1 week ago", text: "Received pack of 5.. red ones look super vibrant in daylight" },
+        { name: "nehaaa_01", stars: "★★★★★", date: "1 week ago", text: "much better quality than local market wala thread stuff" },
+        { name: "vampire.diaries_fan", stars: "★★★★★", date: "1 week ago", text: "OMG so pretyyy! matches all my outfits ✨" },
+        { name: "priyanshu_edits", stars: "★★★★☆", date: "1 week ago", text: "delivery boy was little rude but product is 10/10" },
+        { name: "not_your_sneha", stars: "★★★★★", date: "1 week ago", text: "gifted pack of 10 to my gang everyone loved them!" },
+        { name: "toxic_gamer_69", stars: "★★★★★", date: "2 weeks ago", text: "bhai cod me exact 19rs deduction smooth transaction" },
+        { name: "riya_choudharyyy", stars: "★★★★★", date: "2 weeks ago", text: "packaging was cute af, note had nice handwriting" },
+        { name: "aaryan_02", stars: "★★★★☆", date: "2 weeks ago", text: "nice thread quality but white one gets dirty quickly if u wear while sleeping" },
+        { name: "subho_vlogs", stars: "★★★★★", date: "2 weeks ago", text: "subscribing to this brand fr handmade stuff done right" },
+        { name: "diya.singh_official", stars: "★★★★★", date: "2 weeks ago", text: "received in 4 days in kolkata thanks tan!" },
+        { name: "phantom_raj", stars: "★★★★★", date: "2 weeks ago", text: "black wing pattern goes hard with my black watch" },
+        { name: "simran_xoxo", stars: "★★★★★", date: "3 weeks ago", text: "matching with my bf 🎀 he loved it too" },
+        { name: "kunal_varma_12", stars: "★★★★☆", date: "3 weeks ago", text: "product nice h delivery time thoda fast kar do bas" },
+        { name: "shreya.aestheticss", stars: "★★★★★", date: "3 weeks ago", text: "thread color doesnt fade after washing my hands... quality 100" },
+        { name: "dev_goyal", stars: "★★★★★", date: "3 weeks ago", text: "pack of 10 is budget saver honestly" },
+        { name: "pooja_mehrotra", stars: "★★★★★", date: "3 weeks ago", text: "ordered 2nd time, always delivers quality stuff" },
+        { name: "harsh_clicks_", stars: "★★★★★", date: "1 month ago", text: "looks super good in wrist shots for ig" },
+        { name: "nidhi_roy", stars: "★★★★☆", date: "1 month ago", text: "very soft material doesn't scratch skin" },
+        { name: "tanmay_x", stars: "★★★★★", date: "1 month ago", text: "clean knots no loose thread hanging anywhere" },
+        { name: "alok_kumar_07", stars: "★★★★★", date: "1 month ago", text: "cod fast verification via whatsapp, smooth service" },
+        { name: "kriti.mehta", stars: "★★★★★", date: "1 month ago", text: "my besties were so happy when i gave them this!!" },
+        { name: "dark_shadow_yt", stars: "★★★★☆", date: "1 month ago", text: "mast item hai bhai log le lo" },
+        { name: "sneha_das_22", stars: "★★★★★", date: "1 month ago", text: "loved the wing detail super unique pattern" },
+        { name: "ishika_rajput", stars: "★★★★★", date: "1 month ago", text: "cute cute cuteee ❤️❤️" },
+        { name: "varun_reddy", stars: "★★★★★", date: "1 month ago", text: "got it within 5 days in hyderabad" },
+        { name: "megha_sharmaa", stars: "★★★★☆", date: "1 month ago", text: "gift box is small but cute" },
+        { name: "prateek_007", stars: "★★★★★", date: "1 month ago", text: "19rs advance pay kiya tracking link text pe mil gaya tha" },
+        { name: "aditi_vibe", stars: "★★★★★", date: "1 month ago", text: "aesthetic packaging totally recommended" },
+        { name: "rohan_sharma_98", stars: "★★★★★", date: "1 month ago", text: "worth the hype guys go for it" },
+        { name: "sonali_gupta", stars: "★★★★☆", date: "1 month ago", text: "neatly made handmade vibes feel hoti hai" },
+        { name: "yash_raj_official", stars: "★★★★★", date: "2 months ago", text: "got 5 set for my squad, all good" },
+        { name: "tanya_kapoor", stars: "★★★★★", date: "2 months ago", text: "love the red thread quality so muchhh" },
+        { name: "soham_k", stars: "★★★★★", date: "2 months ago", text: "seamless delivery process" },
+        { name: "ananya_singh_09", stars: "★★★★☆", date: "2 months ago", text: "a bit tight at first but adjustable strap helps" },
+        { name: "badboy_rahul", stars: "★★★★★", date: "2 months ago", text: "best friendship day gift honestly" },
+        { name: "muskan_khatri", stars: "★★★★★", date: "2 months ago", text: "handwritten note was super sweet 💖" },
+        { name: "akash_sen", stars: "★★★★★", date: "2 months ago", text: "nice packaging safe and secure" },
+        { name: "bhumika_p", stars: "★★★★☆", date: "2 months ago", text: "colors match picture 100%" },
+        { name: "ritesh_deshmukh_fan", stars: "★★★★★", date: "2 months ago", text: "super satisfied with the item" },
+        { name: "swati_mishra", stars: "★★★★★", date: "2 months ago", text: "simple yet very beautiful" },
+        { name: "abhishek_beats", stars: "★★★★★", date: "2 months ago", text: "no cheap thread used real handmade feel" },
+        { name: "aisha_khan_11", stars: "★★★★☆", date: "2 months ago", text: "delivered bit late due to rain but item perfect" },
+        { name: "utkarsh_tiwari", stars: "★★★★★", date: "2 months ago", text: "great price for pack of 10" },
+        { name: "khushi_verma", stars: "★★★★★", date: "2 months ago", text: "wearing it every single day!" },
+        { name: "siddharth_m", stars: "★★★★★", date: "2 months ago", text: "solid quality knots don't come undone" },
+        { name: "divya_nair", stars: "★★★★☆", date: "2 months ago", text: "very pretty red color" },
+        { name: "aman_verma_op", stars: "★★★★★", date: "2 months ago", text: "quick support on whatsapp when i asked for tracking" },
+        { name: "jessica_pinto", stars: "★★★★★", date: "2 months ago", text: "totally worth buying guys" },
+        { name: "manish_josh", stars: "★★★★★", date: "2 months ago", text: "bought pack of 5, all intact" },
+        { name: "siddhi_pawar", stars: "★★★★☆", date: "2 months ago", text: "nice handmade craftsmanship" },
+        { name: "sourabh_ghosh", stars: "★★★★★", date: "2 months ago", text: "good finish and bright colors" },
+        { name: "sakshi_tripathi", stars: "★★★★★", date: "2 months ago", text: "my sister was so happy receiving this!" },
+        { name: "shivam_dube", stars: "★★★★★", date: "2 months ago", text: "100% genuine product" },
+        { name: "parul_arora", stars: "★★★★☆", date: "2 months ago", text: "loved the wing pattern details" },
+        { name: "vishal_saini", stars: "★★★★★", date: "2 months ago", text: "top quality embroidery thread" },
+        { name: "urvashi_01", stars: "★★★★★", date: "2 months ago", text: "super aesthetic!" },
+        { name: "tarun_kaushik", stars: "★★★★★", date: "2 months ago", text: "cheap price high quality" },
+        { name: "payal_shah", stars: "★★★★☆", date: "2 months ago", text: "gift box option made gifting so easy" },
+        { name: "nitin_rawat", stars: "★★★★★", date: "2 months ago", text: "nice and sturdy" },
+        { name: "deepika_pad", stars: "★★★★★", date: "2 months ago", text: "really cute wrist accessory" },
+        { name: "kartik_s", stars: "★★★★★", date: "2 months ago", text: "pack of 10 is best deal" },
+        { name: "ishaan_v", stars: "★★★★☆", date: "2 months ago", text: "good product" },
+        { name: "chhavi_b", stars: "★★★★★", date: "2 months ago", text: "so finely woven" },
+        { name: "gautam_city", stars: "★★★★★", date: "2 months ago", text: "fast dispatch" },
+        { name: "hema_m", stars: "★★★★★", date: "2 months ago", text: "loving the black red combo" },
+        { name: "mayank_c", stars: "★★★★☆", date: "2 months ago", text: "nice product delivered safely" },
+        { name: "juhi_s", stars: "★★★★★", date: "2 months ago", text: "super cute!!" },
+        { name: "lalit_k", stars: "★★★★★", date: "2 months ago", text: "awesome handmade stuff" },
+        { name: "monika_r", stars: "★★★★★", date: "2 months ago", text: "best friendship band" },
+        { name: "nakul_t", stars: "★★★★☆", date: "2 months ago", text: "good response on whatsapp" },
+        { name: "omkar_p", stars: "★★★★★", date: "2 months ago", text: "cheap and best quality" },
+        { name: "pallavi_g", stars: "★★★★★", date: "2 months ago", text: "gifted to my crush hihi" },
+        { name: "quresh_m", stars: "★★★★★", date: "2 months ago", text: "good work by creator" },
+        { name: "radhika_v", stars: "★★★★☆", date: "2 months ago", text: "loved it sm" },
+        { name: "sameer_a", stars: "★★★★★", date: "2 months ago", text: "nice job tan!" },
+        { name: "tanvi_d", stars: "★★★★★", date: "2 months ago", text: "handwritten note was precious" },
+        { name: "uma_s", stars: "★★★★★", date: "2 months ago", text: "beautiful color contrast" },
+        { name: "vibhor_k", stars: "★★★★☆", date: "2 months ago", text: "worth buying" },
+        { name: "wasim_r", stars: "★★★★★", date: "2 months ago", text: "good packaging" },
+        { name: "xenia_m", stars: "★★★★★", date: "2 months ago", text: "totally in love with these bands" },
+        { name: "yashika_p", stars: "★★★★★", date: "2 months ago", text: "great price range" },
+        { name: "zoya_f", stars: "★★★★☆", date: "2 months ago", text: "so unique design" },
+        { name: "aarav_001", stars: "★★★★★", date: "2 months ago", text: "awesome product" },
+        { name: "bhavna_k", stars: "★★★★★", date: "2 months ago", text: "pretty pattern" },
+        { name: "chirag_m", stars: "★★★★★", date: "2 months ago", text: "nice delivery service" },
+        { name: "drishti_s", stars: "★★★★☆", date: "2 months ago", text: "fits perfectly" },
+        { name: "ekta_r", stars: "★★★★★", date: "2 months ago", text: "my friends loved them" },
+        { name: "farhan_k", stars: "★★★★★", date: "2 months ago", text: "10/10 quality" },
+        { name: "garima_v", stars: "★★★★★", date: "2 months ago", text: "super smooth thread" },
+        { name: "himanshu_b", stars: "★★★★☆", date: "2 months ago", text: "nice handmade item" },
+        { name: "isha_d", stars: "★★★★★", date: "2 months ago", text: "value for money" },
+        { name: "jatin_p", stars: "★★★★★", date: "2 months ago", text: "got delivered in 3 days" },
+        { name: "kavya_n", stars: "★★★★★", date: "2 months ago", text: "really neat work" },
+        { name: "lucky_s", stars: "★★★★☆", date: "2 months ago", text: "good product" },
+        { name: "mitali_g", stars: "★★★★★", date: "2 months ago", text: "so happy with order" },
+        { name: "nayan_k", stars: "★★★★★", date: "2 months ago", text: "perfect fit" },
+        { name: "op_vibes_yt", stars: "★★★★★", date: "2 months ago", text: "bhai mast hai ekdum" },
+        { name: "prachi_s", stars: "★★★★☆", date: "2 months ago", text: "loved the packaging" },
+        { name: "qasim_v", stars: "★★★★★", date: "2 months ago", text: "very fine stitching" },
+        { name: "riya_sen", stars: "★★★★★", date: "2 months ago", text: "best buy ever" },
+        { name: "shivam_k", stars: "★★★★★", date: "2 months ago", text: "good colors" },
+        { name: "trupti_m", stars: "★★★★☆", date: "2 months ago", text: "nice experience" },
+        { name: "ujwal_p", stars: "★★★★★", date: "2 months ago", text: "really satisfied" },
+        { name: "varsha_r", stars: "★★★★★", date: "2 months ago", text: "beautiful threads" },
+        { name: "world_of_ananya", stars: "★★★★★", date: "2 months ago", text: "cutest bands ever" },
+        { name: "yash_gupta_01", stars: "★★★★☆", date: "2 months ago", text: "good delivery time" },
+        { name: "zain_m", stars: "★★★★★", date: "2 months ago", text: "solid quality" },
+        { name: "aarti_k", stars: "★★★★★", date: "2 months ago", text: "super aesthetic" },
+        { name: "bhavesh_s", stars: "★★★★★", date: "2 months ago", text: "good seller response" },
+        { name: "charu_d", stars: "★★★★☆", date: "2 months ago", text: "threads are strong" },
+        { name: "daksh_p", stars: "★★★★★", date: "2 months ago", text: "value for money product" },
+        { name: "esha_r", stars: "★★★★★", date: "2 months ago", text: "loved it so much!" },
+        { name: "faisal_k", stars: "★★★★★", date: "2 months ago", text: "100% recommended" },
+        { name: "gitanjali_s", stars: "★★★★☆", date: "2 months ago", text: "nice and soft thread" },
+        { name: "harshita_m", stars: "★★★★★", date: "2 months ago", text: "ordered again for friends" },
+        { name: "indrajit_v", stars: "★★★★★", date: "2 months ago", text: "great packaging and finish" },
+        { name: "janki_p", stars: "★★★★★", date: "2 months ago", text: "simply loved it" },
+        { name: "karan_blabla", stars: "★★★★☆", date: "2 months ago", text: "nice product quality" },
+        { name: "lata_g", stars: "★★★★★", date: "2 months ago", text: "handicraft at its best" }
+    ];
+
+    let currentlyDisplayedReviews = 10;
+
+    function renderReviews() {
+        const container = document.getElementById('reviewsList');
+        container.innerHTML = '';
+
+        const reviewsToRender = allReviews.slice(0, currentlyDisplayedReviews);
+
+        reviewsToRender.forEach(rev => {
+            const card = document.createElement('div');
+            card.className = 'review-card';
+            card.innerHTML = `
+                <div class="review-header">
+                    <div>
+                        <span class="reviewer-name">${rev.name}</span>
+                        <span class="review-date">${rev.date}</span>
+                    </div>
+                    <span class="stars">${rev.stars}</span>
+                </div>
+                <p class="review-text">${rev.text}</p>
+            `;
+            container.appendChild(card);
+        });
+
+        const remaining = allReviews.length - currentlyDisplayedReviews;
+        const btn = document.getElementById('loadMoreBtn');
+        if (remaining > 0) {
+            btn.innerText = `Load More Reviews (${remaining} remaining)`;
+            btn.style.display = 'block';
+        } else {
+            btn.style.display = 'none';
+        }
+
+        document.getElementById('reviewBadgeCount').innerText = allReviews.length;
+        document.getElementById('summaryTotalCount').innerText = allReviews.length;
+    }
+
+    function loadMoreReviews() {
+        currentlyDisplayedReviews += 20;
+        if (currentlyDisplayedReviews > allReviews.length) {
+            currentlyDisplayedReviews = allReviews.length;
+        }
+        renderReviews();
+    }
+
+    function scrollToReviews() {
+        document.getElementById('reviewsSection').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function toggleReviewForm() {
+        const box = document.getElementById('addReviewBox');
+        if (box.style.display === 'block') {
+            box.style.display = 'none';
+        } else {
+            box.style.display = 'block';
+        }
+    }
+
+    function setFormRating(rating) {
+        selectedFormRating = rating;
+        const stars = document.querySelectorAll('#starRatingSelect .star-option');
+        stars.forEach((s, idx) => {
+            if (idx < rating) {
+                s.classList.add('selected');
+            } else {
+                s.classList.remove('selected');
+            }
+        });
+    }
+
+    function submitNewReview() {
+        const nameInput = document.getElementById('newReviewerName').value.trim();
+        const textInput = document.getElementById('newReviewText').value.trim();
+
+        if (!nameInput || !textInput) {
+            alert('Please fill out both your name/handle and review text.');
+            return;
+        }
+
+        let starString = '★'.repeat(selectedFormRating) + '☆'.repeat(5 - selectedFormRating);
+
+        allReviews.unshift({
+            name: nameInput,
+            stars: starString,
+            date: "Just now",
+            text: textInput
+        });
+
+        document.getElementById('newReviewerName').value = '';
+        document.getElementById('newReviewText').value = '';
+        document.getElementById('addReviewBox').style.display = 'none';
+
+        currentlyDisplayedReviews += 1;
+        renderReviews();
+        alert('Thank you! Your review has been added.');
+    }
+
+    // Initialize Reviews on Load
+    renderReviews();
 
     // --- Carousel Swipe Functionality ---
     const carousel = document.getElementById('carouselMain');

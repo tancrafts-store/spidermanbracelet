@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Herohaven - UPI Payment</title>
+  <style>
+    :root {
+      --primary-color: #0f172a;
+      --accent-color: #25d366;
+      --accent-hover: #1da851;
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .payment-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+      border: 1px solid var(--border-color);
+      width: 100%;
+      max-width: 400px;
+      padding: 28px 24px;
+      text-align: center;
+    }
+
+    /* Brand Header */
+    .brand-header {
+      margin-bottom: 20px;
+    }
+
+    .brand-logo {
+      max-width: 160px;
+      max-height: 50px;
+      object-fit: contain;
+    }
+
+    /* Timer Display */
+    .timer-container {
+      background-color: #f1f5f9;
+      border-radius: 8px;
+      padding: 10px 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .timer-time {
+      font-weight: 700;
+      color: #e11d48;
+      font-variant-numeric: tabular-nums;
+      font-size: 16px;
+    }
+
+    /* QR Code Container */
+    .qr-box {
+      background: #ffffff;
+      border: 2px dashed var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+
+    .qr-image {
+      width: 200px;
+      height: 200px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .instructions {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 20px;
+    }
+
+    /* Payment Logos */
+    .payment-logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .payment-logos img, 
+    .payment-logos svg {
+      height: 26px;
+      object-fit: contain;
+    }
+
+    /* Paid Button Area */
+    .action-container {
+      min-height: 52px;
+      margin-bottom: 20px;
+    }
+
+    .btn-paid {
+      display: none;
+      width: 100%;
+      background-color: var(--accent-color);
+      color: #ffffff;
+      border: none;
+      padding: 14px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+      text-decoration: none;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+    }
+
+    .btn-paid:hover {
+      background-color: var(--accent-hover);
+    }
+
+    .btn-paid:active {
+      transform: scale(0.98);
+    }
+
+    .btn-paid.visible {
+      display: flex;
+      animation: fadeIn 0.4s ease-in-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Footer Branding */
+    .footer-branding {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .razorpay-logo {
+      height: 16px;
+      object-fit: contain;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="payment-card">
+    <!-- Brand Header -->
+    <div class="brand-header">
+      <img src="herohaven.png" alt="Herohaven" class="brand-logo">
+    </div>
+
+    <!-- Countdown Timer -->
+    <div class="timer-container">
+      <span>Pay within:</span>
+      <span id="timer" class="timer-time">02:00</span>
+    </div>
+
+    <!-- QR Code Section -->
+    <div>
+      <div class="qr-box">
+        <img src="qr.png" alt="Payment QR Code" class="qr-image">
+      </div>
+      <p class="instructions">Scan to pay using any UPI app</p>
+    </div>
+
+    <!-- UPI App Logos -->
+    <div class="payment-logos">
+      <!-- Original Inline Google Pay Logo (Never breaks due to CORS/hotlinking) -->
+      <svg viewBox="0 0 100 40" height="26" title="Google Pay">
+        <path fill="#4285F4" d="M38.8 19.3c0-.6-.1-1.2-.2-1.8H20v3.5h10.6c-.5 2.5-1.9 4.6-4.1 6.1v5.1h6.6c3.9-3.6 6.1-8.9 6.1-15.1z"/>
+        <path fill="#34A853" d="M20 38.5c5.6 0 10.3-1.8 13.7-5l-6.6-5.1c-1.8 1.2-4.2 2-7.1 2-5.4 0-10-3.7-11.6-8.7H1.6v5.3C5 33.7 12 38.5 20 38.5z"/>
+        <path fill="#FBBC05" d="M8.4 21.7c-.4-1.2-.6-2.5-.6-3.7s.2-2.5.6-3.7V9H1.6C.2 11.8 0 14.8 0 18s.2 6.2 1.6 9l6.8-5.3z"/>
+        <path fill="#EA4335" d="M20 5.5c3 0 5.8 1 8 3.1l6-6C30.3.9 25.6-1 20-1 12-1 5 3.8 1.6 10.7l6.8 5.3c1.6-5 6.2-8.7 11.6-8.7z"/>
+        <text x="44" y="27" font-family="Roboto, Arial, sans-serif" font-weight="500" font-size="21" fill="#5f6368">Pay</text>
+      </svg>
+
+      <!-- PhonePe Logo -->
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/71/PhonePe_Logo.svg" alt="PhonePe">
+      <!-- UPI Logo -->
+      <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/UPI-Logo-vector.svg" alt="UPI">
+    </div>
+
+    <!-- Conditional "Paid" WhatsApp Redirect Button -->
+    <div class="action-container">
+      <button id="paidBtn" class="btn-paid" onclick="confirmPayment()">
+        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+        </svg>
+        Paid
+      </button>
+    </div>
+
+    <!-- Razorpay Footer -->
+    <div class="footer-branding">
+      <span>Powered by</span>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Razorpay_logo.svg" alt="Razorpay" class="razorpay-logo">
+    </div>
+  </div>
+
+  <script>
+    // Timer Configuration (2 Minutes = 120 Seconds)
+    let totalSeconds = 120;
+    const timerElement = document.getElementById('timer');
+    const paidBtn = document.getElementById('paidBtn');
+
+    function updateTimer() {
+      const minutes = Math.floor(totalSeconds / 60);
+      const seconds = totalSeconds % 60;
+
+      // Format time as MM:SS
+      timerElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+      // Trigger button appearance at 1-minute mark (60 seconds or less)
+      if (totalSeconds <= 60 && !paidBtn.classList.contains('visible')) {
+        paidBtn.classList.add('visible');
+      }
+
+      if (totalSeconds > 0) {
+        totalSeconds--;
+      } else {
+        clearInterval(timerInterval);
+        timerElement.textContent = "00:00";
+        timerElement.style.color = "#94a3b8";
+      }
+    }
+
+    // Run timer every second
+    const timerInterval = setInterval(updateTimer, 1000);
+    updateTimer();
+
+    // Redirect user to WhatsApp with pre-filled message
+    function confirmPayment() {
+      const phoneNumber = "918514012448";
+      const message = encodeURIComponent("hey i just ordered on your website");
+      window.location.href = `https://wa.me/${phoneNumber}?text=${message}`;
+    }
+  </script>
+
+</body>
+</html>

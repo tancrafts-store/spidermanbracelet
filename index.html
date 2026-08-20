@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Handcrafted Woven Wings Friendship Bracelet | Tan-crafts</title>
+    <style>
+        :root {
+            --primary: #d9383a;
+            --primary-hover: #b82b2d;
+            --bg: #f4f5f7;
+            --card-bg: #ffffff;
+            --text: #1a1a1a;
+            --text-muted: #666666;
+            --border: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            padding-bottom: 90px;
+        }
+
+        .mobile-container {
+            max-width: 480px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Header / Brand Logo Section */
+        .brand-header {
+            text-align: center;
+            padding: 12px 16px;
+            background: #ffffff;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .brand-logo-img {
+            max-height: 45px;
+            width: auto;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .brand-slogan {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-top: 4px;
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-widget {
+            position: fixed;
+            bottom: 100px;
+            right: 16px;
+            z-index: 98;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .whatsapp-tooltip {
+            background: #ffffff;
+            color: #1a1a1a;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border: 1px solid var(--border);
+            white-space: nowrap;
+        }
+
+        .whatsapp-float {
+            width: 50px;
+            height: 50px;
+            background-color: #25d366;
+            color: #fff;
+            border-radius: 50px;
+            text-align: center;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease;
+        }
+
+        .whatsapp-float:active {
+            transform: scale(0.95);
+        }
+
+        .whatsapp-float svg {
+            width: 28px;
+            height: 28px;
+            fill: white;
+        }
+
+        /* Touch-Swipeable Image Carousel */
+        .carousel-container {
+            width: 100%;
+            position: relative;
+            background: #eee;
+            overflow: hidden;
+        }
+
+        .carousel-main {
+            display: flex;
+            width: 100%;
+            overflow-x: scroll;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+            touch-action: pan-x pan-y;
+        }
+
+        .carousel-main::-webkit-scrollbar {
+            display: none;
+        }
+
+        .carousel-slide {
+            flex: 0 0 100%;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            pointer-events: none;
+        }
+
+        /* Scrollable Thumbnails */
+        .gallery-thumbs-scroll {
+            display: flex;
+            gap: 8px;
+            padding: 12px 16px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            background: #ffffff;
+        }
+
+        .gallery-thumbs-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .thumb {
+            flex: 0 0 60px;
+            height: 60px;
+            aspect-ratio: 1 / 1;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            background: #eee;
+            cursor: pointer;
+        }
+
+        .thumb.active {
+            border-color: var(--primary);
+        }
+
+        .thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Product Info */
+        .product-info {
+            padding: 16px;
+        }
+
+        .title {
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 6px;
+        }
+
+        .subtitle {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        /* Pack Selector Variant Options */
+        .variant-section {
+            margin-bottom: 16px;
+        }
+
+        .variant-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #4a5568;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .variant-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .variant-card {
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 10px;
+            background: #fafafa;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .variant-card.selected {
+            border-color: var(--primary);
+            background: #fff5f5;
+        }
+
+        .variant-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .variant-sub {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .variant-price {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-top: 6px;
+        }
+
+        .variant-badge {
+            position: absolute;
+            top: -8px;
+            right: 8px;
+            background: var(--primary);
+            color: #fff;
+            font-size: 9px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .price-card {
+            background: #fff5f5;
+            border: 1px dashed var(--primary);
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 16px;
+        }
+
+        .price-row {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .price-tag {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: #a0aec0;
+            font-size: 13px;
+        }
+
+        .cod-badge {
+            display: inline-block;
+            background: #e6f4ea;
+            color: #137333;
+            font-weight: 700;
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-top: 4px;
+            text-transform: uppercase;
+        }
+
+        .cod-text {
+            font-size: 12px;
+            color: #4a5568;
+            margin-top: 6px;
+        }
+
+        /* Packaging Option Card */
+        .packaging-card {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 16px;
+            background: #fafafa;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .packaging-card.selected {
+            border-color: var(--primary);
+            background: #fff0f0;
+        }
+
+        .packaging-card img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 6px;
+            background: #eee;
+        }
+
+        .packaging-details {
+            flex: 1;
+        }
+
+        .packaging-title {
+            font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .packaging-desc {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .packaging-card input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+        }
+
+        .delivery-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #f7fafc;
+            border: 1px solid var(--border);
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #2d3748;
+            margin-bottom: 20px;
+        }
+
+        .payment-icons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 8px;
+        }
+
+        .payment-icons img {
+            height: 22px;
+            object-fit: contain;
+        }
+
+        .section-heading {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .product-description-text {
+            font-size: 13px;
+            color: #4a5568;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .description-list {
+            font-size: 13px;
+            color: #4a5568;
+            padding-left: 18px;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .packaging-preview-container {
+            margin-bottom: 24px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            background: #fafafa;
+        }
+
+        .packaging-preview-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+
+        .packaging-preview-img {
+            width: 100%;
+            height: auto;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 6px;
+            display: block;
+        }
+
+        /* Mobile Bottom Sticky Bar */
+        .sticky-bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            border-top: 1px solid var(--border);
+            padding: 10px 16px;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+            z-index: 99;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .buy-btn {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            font-size: 15px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .buy-btn:active {
+            background: var(--primary-hover);
+        }
+
+        .btn-subtext {
+            font-size: 11px;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        /* Reviews Section */
+        .reviews-section {
+            border-top: 8px solid var(--bg);
+            padding: 16px;
+        }
+
+        .review-card {
+            border-bottom: 1px solid var(--border);
+            padding: 12px 0;
+        }
+
+        .review-card:last-child {
+            border-bottom: none;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .reviewer-name {
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .stars {
+            color: #ffb800;
+            font-size: 12px;
+        }
+
+        .review-text {
+            font-size: 13px;
+            color: #2d3748;
+            line-height: 1.4;
+        }
+
+        /* Bottom Sheet Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: none;
+            justify-content: flex-end;
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            border-top-left-radius: 16px;
+            border-top-right-radius: 16px;
+            padding: 20px 16px 24px;
+            position: relative;
+            max-height: 85vh;
+            overflow-y: auto;
+            animation: slideUp 0.25s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            font-size: 24px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            color: #a0aec0;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #4a5568;
+            text-transform: uppercase;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 14px;
+            background: #fdfdfd;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .qr-section {
+            display: none;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .qr-code {
+            width: 160px;
+            height: 160px;
+            margin: 12px auto;
+            border: 1px solid var(--border);
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        .powered-by {
+            margin-top: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 11px;
+            color: #718096;
+        }
+
+        .powered-by img {
+            height: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="mobile-container">
+    <!-- Header -->
+    <header class="brand-header">
+        <img src="logo.png" alt="Tan-crafts Logo" class="brand-logo-img">
+        <div class="brand-slogan">Made at home with Love by Tan</div>
+    </header>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/918514012448?text=Hi%2C%20I%20have%20a%20query%20regarding%20the%20Handcrafted%20Woven%20Wings%20Bracelet" 
+       class="whatsapp-widget" 
+       target="_blank" 
+       aria-label="Chat with us on WhatsApp for any queries">
+        <span class="whatsapp-tooltip">Chat for queries 💬</span>
+        <div class="whatsapp-float">
+            <svg viewBox="0 0 32 32">
+                <path d="M16 0c-8.837 0-16 7.163-16 16 0 2.825 0.737 5.607 2.137 8.048l-2.137 7.952 8.135-2.135c2.372 1.302 5.060 1.993 7.865 1.993 8.837 0 16-7.163 16-16s-7.163-16-16-16zM16 29.35c-2.48 0-4.908-0.667-7.032-1.928l-0.503-0.298-5.23 1.372 1.396-5.093-0.328-0.521c-1.385-2.202-2.118-4.757-2.118-7.382 0-7.625 6.203-13.828 13.828-13.828s13.828 6.203 13.828 13.828-6.203 13.828-13.828 13.828zM22.585 19.33c-0.362-0.181-2.137-1.054-2.468-1.175s-0.573-0.181-0.814 0.181c-0.241 0.362-0.934 1.175-1.146 1.416s-0.422 0.271-0.784 0.091c-0.362-0.181-1.528-0.563-2.91-1.796-1.076-0.959-1.803-2.143-2.014-2.505s-0.022-0.558 0.159-0.738c0.163-0.162 0.362-0.422 0.543-0.633s0.241-0.362 0.362-0.603c0.121-0.241 0.060-0.452-0.030-0.633s-0.814-1.96-1.116-2.684c-0.294-0.705-0.593-0.609-0.814-0.62-0.211-0.010-0.452-0.010-0.693-0.010s-0.633 0.091-0.965 0.452c-0.332 0.362-1.266 1.236-1.266 3.015s1.296 3.497 1.477 3.738c0.181 0.241 2.55 3.894 6.178 5.461 0.863 0.373 1.537 0.596 2.062 0.763 0.867 0.276 1.656 0.237 2.28 0.144 0.696-0.104 2.137-0.874 2.439-1.718s0.302-1.567 0.211-1.718c-0.091-0.151-0.332-0.241-0.693-0.422z"></path>
+            </svg>
+        </div>
+    </a>
+
+    <!-- Swipeable Image Carousel Container -->
+    <div class="carousel-container">
+        <div class="carousel-main" id="carouselMain">
+            <div class="carousel-slide"><img src="p1.png" alt="Product Image 1"></div>
+            <div class="carousel-slide"><img src="p2.png" alt="Product Image 2"></div>
+            <div class="carousel-slide"><img src="p3.png" alt="Product Image 3"></div>
+            <div class="carousel-slide"><img src="p4.png" alt="Product Image 4"></div>
+            <div class="carousel-slide"><img src="p5.png" alt="Product Image 5"></div>
+            <div class="carousel-slide"><img src="p6.png" alt="Product Image 6"></div>
+            <div class="carousel-slide"><img src="p7.png" alt="Product Image 7"></div>
+            <div class="carousel-slide"><img src="p8.png" alt="Product Image 8"></div>
+        </div>
+    </div>
+    
+    <!-- Thumbnails below Carousel -->
+    <div class="gallery-thumbs-scroll">
+        <div class="thumb active" onclick="scrollToSlide(0)"><img src="p1.png" alt="p1"></div>
+        <div class="thumb" onclick="scrollToSlide(1)"><img src="p2.png" alt="p2"></div>
+        <div class="thumb" onclick="scrollToSlide(2)"><img src="p3.png" alt="p3"></div>
+        <div class="thumb" onclick="scrollToSlide(3)"><img src="p4.png" alt="p4"></div>
+        <div class="thumb" onclick="scrollToSlide(4)"><img src="p5.png" alt="p5"></div>
+        <div class="thumb" onclick="scrollToSlide(5)"><img src="p6.png" alt="p6"></div>
+        <div class="thumb" onclick="scrollToSlide(6)"><img src="p7.png" alt="p7"></div>
+        <div class="thumb" onclick="scrollToSlide(7)"><img src="p8.png" alt="p8"></div>
+    </div>
+
+    <!-- Product Details -->
+    <div class="product-info">
+        <h1 class="title">Handcrafted Woven Wings Friendship Bracelet</h1>
+        <p class="subtitle">Intricately woven pattern with winged detail</p>
+
+        <!-- Pack Selection Variant Options -->
+        <div class="variant-section">
+            <span class="variant-label">Select Pack Combo:</span>
+            <div class="variant-grid">
+                <div class="variant-card selected" id="pack5Card" onclick="selectPack(5)">
+                    <div class="variant-title">Pack of 5</div>
+                    <div class="variant-sub">2 White + 2 Black + 1 Red</div>
+                    <div class="variant-price">Rs. 99</div>
+                </div>
+                <div class="variant-card" id="pack10Card" onclick="selectPack(10)">
+                    <div class="variant-badge">SAVE MORE</div>
+                    <div class="variant-title">Pack of 10</div>
+                    <div class="variant-sub">3 White + 3 Black + 4 Red</div>
+                    <div class="variant-price">Rs. 149</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="price-card">
+            <div class="price-row">
+                <span class="price-tag" id="priceDisplay">Rs. 99</span>
+                <span class="original-price" id="originalPriceDisplay">Rs. 299</span>
+            </div>
+            <div class="cod-badge">Partial COD Available</div>
+            <p class="cod-text" id="codTextDisplay">Pay <b>Rs. 19 now</b> to confirm & remaining <b>Rs. 80 on delivery</b>.</p>
+        </div>
+
+        <!-- Customised Gift Packaging Option Card -->
+        <div class="packaging-card" id="packagingCard" onclick="toggleGiftPackaging()">
+            <img src="cp.png" alt="Gift Packaging Placeholder">
+            <div class="packaging-details">
+                <div class="packaging-title">
+                    <span>Add Customised Gift Packaging</span>
+                    <span style="color: var(--primary);">+Rs. 20</span>
+                </div>
+                <div class="packaging-desc">Includes custom handwritten note & gift box packaging.</div>
+            </div>
+            <input type="checkbox" id="giftPackagingCheckbox" onclick="event.stopPropagation(); toggleGiftPackaging();">
+        </div>
+
+        <div class="delivery-box">
+            <span>🚚 Delivery in <b>5 Days</b></span>
+        </div>
+
+        <h2 class="section-heading">Description</h2>
+        <p class="product-description-text">
+            Each bracelet is lovingly handmade by Tan using premium embroidery threads. Featuring an intricate, high-contrast winged motif, these bracelets represent friendship, love, and protection. Soft on skin and durable for long-term daily wear.
+        </p>
+        <ul class="description-list">
+            <li>100% hand-knotted high-durability embroidery thread.</li>
+            <li>Detailed wing pattern in vivid contrasting colors.</li>
+            <li>Adjustable tie-on strap fits all wrist sizes effortlessly.</li>
+            <li>Perfect for daily wear, aesthetic layering, or sentimental gifting.</li>
+        </ul>
+
+        <!-- Description Packaging Preview -->
+        <div class="packaging-preview-container">
+            <div class="packaging-preview-title">🎁 Custom Packaging Preview</div>
+            <img src="cp.png" alt="Custom Packaging Preview" class="packaging-preview-img">
+        </div>
+    </div>
+
+    <!-- Customer Reviews -->
+    <div class="reviews-section">
+        <h2 class="section-heading">Customer Reviews (3)</h2>
+        
+        <div class="review-card">
+            <div class="review-header">
+                <span class="reviewer-name">annanya</span>
+                <span class="stars">★★★★★</span>
+            </div>
+            <p class="review-text">The weaving quality is honestly super neat! Loved how the red and black ones look on wrist. Delivered in 4 days.</p>
+        </div>
+
+        <div class="review-card">
+            <div class="review-header">
+                <span class="reviewer-name">Anu?</span>
+                <span class="stars">★★★★★</span>
+            </div>
+            <p class="review-text">Got matching ones for me and my best friend. Thread quality doesn't fray easily. Totally worth it.</p>
+        </div>
+
+        <div class="review-card">
+            <div class="review-header">
+                <span class="reviewer-name">Spidy69</span>
+                <span class="stars">★★★★☆</span>
+            </div>
+            <p class="review-text">Paid 19 rs partial COD and received item on time without issues. Looks exactly like the image.</p>
+        </div>
+    </div>
+
+    <!-- Sticky Bottom Bar -->
+    <div class="sticky-bottom-bar">
+        <button class="buy-btn" onclick="openModal()">
+            <span>BUY NOW - CASH ON DELIVERY</span>
+            <span class="btn-subtext" id="btnAdvanceText">Pay ₹19 advance to confirm</span>
+        </button>
+        <div class="payment-icons">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_%28GPay%29_Logo.svg" alt="Google Pay">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/71/PhonePe_Logo.svg" alt="PhonePe">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/UPI-Logo-vector.svg" alt="UPI">
+        </div>
+    </div>
+</div>
+
+<!-- Bottom Sheet Form Modal -->
+<div class="modal-overlay" id="checkoutModal">
+    <div class="modal-content">
+        <button class="close-btn" onclick="closeModal()">&times;</button>
+        
+        <!-- Form View -->
+        <div id="formView">
+            <h3 style="font-size: 16px; margin-bottom: 2px;">Confirm Order (Partial COD)</h3>
+            <p style="font-size: 12px; color: #718096; margin-bottom: 14px;" id="modalPriceSubtext">Pay ₹19 advance to confirm. Pay ₹80 on delivery.</p>
+
+            <form id="codForm" onsubmit="handleFormSubmit(event)">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" required placeholder="Enter full name">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" pattern="[0-9]{10}" required placeholder="10-digit mobile number">
+                </div>
+                <div class="form-group">
+                    <label>Full Address</label>
+                    <textarea rows="2" required placeholder="House No, Street, Area"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>City</label>
+                    <input type="text" required placeholder="City">
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                    <div class="form-group">
+                        <label>State</label>
+                        <input type="text" required placeholder="State">
+                    </div>
+                    <div class="form-group">
+                        <label>Pincode</label>
+                        <input type="text" pattern="[0-9]{6}" required placeholder="6 digits">
+                    </div>
+                </div>
+
+                <div class="payment-icons" style="margin: 12px 0;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_%28GPay%29_Logo.svg" alt="Google Pay">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/71/PhonePe_Logo.svg" alt="PhonePe">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/UPI-Logo-vector.svg" alt="UPI">
+                </div>
+
+                <button type="submit" class="buy-btn" id="modalSubmitBtn" style="padding: 12px;">Confirm Order & Pay ₹19</button>
+            </form>
+        </div>
+
+        <!-- QR Code View -->
+        <div id="qrView" class="qr-section">
+            <h3 style="font-size: 16px;" id="qrTitle">Scan & Pay ₹19</h3>
+            <p style="font-size: 12px; color: #718096;">Pay using any UPI App to place order</p>
+
+            <img id="qrCodeImg" src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=upi://pay?pa=merchant@razorpay&pn=TanCrafts&am=19" class="qr-code" alt="UPI QR Code">
+
+            <div class="payment-icons" style="margin-bottom: 12px;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_%28GPay%29_Logo.svg" alt="Google Pay">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/71/PhonePe_Logo.svg" alt="PhonePe">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/UPI-Logo-vector.svg" alt="UPI">
+            </div>
+
+            <div class="powered-by">
+                <span>powered by</span>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Razorpay_logo.svg" alt="Razorpay">
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    let selectedPack = 5; // Default Pack of 5
+    let isGiftPackagingSelected = false;
+
+    // --- Carousel Swipe Functionality ---
+    const carousel = document.getElementById('carouselMain');
+
+    carousel.addEventListener('scroll', () => {
+        const slideWidth = carousel.clientWidth;
+        if (slideWidth > 0) {
+            const activeIndex = Math.round(carousel.scrollLeft / slideWidth);
+            updateActiveThumb(activeIndex);
+        }
+    });
+
+    function scrollToSlide(index) {
+        const slideWidth = carousel.clientWidth;
+        carousel.scrollTo({
+            left: index * slideWidth,
+            behavior: 'smooth'
+        });
+        updateActiveThumb(index);
+    }
+
+    function updateActiveThumb(index) {
+        const thumbs = document.querySelectorAll('.thumb');
+        thumbs.forEach((thumb, i) => {
+            if (i === index) {
+                thumb.classList.add('active');
+            } else {
+                thumb.classList.remove('active');
+            }
+        });
+    }
+
+    // --- Pack & Pricing Logic ---
+    function selectPack(packSize) {
+        selectedPack = packSize;
+        
+        if (packSize === 5) {
+            document.getElementById('pack5Card').classList.add('selected');
+            document.getElementById('pack10Card').classList.remove('selected');
+        } else {
+            document.getElementById('pack10Card').classList.add('selected');
+            document.getElementById('pack5Card').classList.remove('selected');
+        }
+
+        updatePricingUI();
+    }
+
+    function toggleGiftPackaging() {
+        isGiftPackagingSelected = !isGiftPackagingSelected;
+        document.getElementById('giftPackagingCheckbox').checked = isGiftPackagingSelected;
+
+        const card = document.getElementById('packagingCard');
+        if (isGiftPackagingSelected) {
+            card.classList.add('selected');
+        } else {
+            card.classList.remove('selected');
+        }
+
+        updatePricingUI();
+    }
+
+    function updatePricingUI() {
+        let basePrice = selectedPack === 5 ? 99 : 149;
+        let originalPrice = selectedPack === 5 ? 299 : 499;
+        let finalPrice = isGiftPackagingSelected ? basePrice + 20 : basePrice;
+
+        document.getElementById('priceDisplay').innerText = "Rs. " + finalPrice;
+        document.getElementById('originalPriceDisplay').innerText = "Rs. " + (originalPrice + (isGiftPackagingSelected ? 20 : 0));
+
+        let remCodPrice = finalPrice - 19;
+        document.getElementById('codTextDisplay').innerHTML = `Pay <b>Rs. 19 now</b> to confirm & remaining <b>Rs. ${remCodPrice} on delivery</b>.`;
+        document.getElementById('btnAdvanceText').innerText = "Pay ₹19 advance to confirm";
+        document.getElementById('modalPriceSubtext').innerText = `Pay ₹19 advance to confirm. Pay ₹${remCodPrice} on delivery.`;
+        document.getElementById('modalSubmitBtn').innerText = "Confirm Order & Pay ₹19";
+    }
+
+    // --- Modal & Form Logic ---
+    function openModal() {
+        document.getElementById('checkoutModal').style.display = 'flex';
+        document.getElementById('formView').style.display = 'block';
+        document.getElementById('qrView').style.display = 'none';
+    }
+
+    function closeModal() {
+        document.getElementById('checkoutModal').style.display = 'none';
+    }
+
+    function handleFormSubmit(e) {
+        e.preventDefault();
+        
+        if (selectedPack === 10) {
+            if (isGiftPackagingSelected) {
+                window.location.href = "payindex1.html";
+            } else {
+                window.location.href = "payindex2.html";
+            }
+        } else {
+            if (isGiftPackagingSelected) {
+                window.location.href = "payindex1.html";
+            } else {
+                window.location.href = "payindex2.html";
+            }
+        }
+    }
+
+    document.getElementById('checkoutModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeModal();
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -443,6 +443,34 @@
             margin-bottom: 16px;
         }
 
+        /* Handmade Section Styles */
+        .handmade-section {
+            margin-bottom: 16px;
+        }
+
+        .handmade-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .handmade-media-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .handmade-media-item {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            display: block;
+            background: #eee;
+        }
+
         .packaging-preview-container {
             margin-bottom: 24px;
             border: 1px solid var(--border);
@@ -847,6 +875,16 @@
         <p class="product-description-text">
             Each bracelet is lovingly handmade by Tan using premium embroidery threads. Featuring an intricate, high-contrast winged motif, these bracelets represent friendship, love, and protection. Soft on skin and durable for long-term daily wear.
         </p>
+
+        <!-- Handmade Section -->
+        <div class="handmade-section">
+            <h3 class="handmade-title">Hand Made Process</h3>
+            <div class="handmade-media-grid">
+                <img src="g.gif" alt="Handmade Product GIF" class="handmade-media-item">
+                <img src="g.png" alt="Handmade Product Image" class="handmade-media-item">
+            </div>
+        </div>
+
         <ul class="description-list">
             <li>100% hand-knotted high-durability embroidery thread.</li>
             <li>Detailed wing pattern in vivid contrasting colors.</li>

@@ -37,7 +37,6 @@
             position: relative;
         }
 
-        /* Header / Brand Logo Section */
         .brand-header {
             text-align: center;
             padding: 12px 16px;
@@ -60,7 +59,6 @@
             margin-top: 4px;
         }
 
-        /* Floating WhatsApp Button */
         .whatsapp-widget {
             position: fixed;
             bottom: 100px;
@@ -108,7 +106,6 @@
             fill: white;
         }
 
-        /* Touch-Swipeable Image Carousel */
         .carousel-container {
             width: 100%;
             position: relative;
@@ -147,7 +144,6 @@
             pointer-events: none;
         }
 
-        /* Scrollable Thumbnails */
         .gallery-thumbs-scroll {
             display: flex;
             gap: 8px;
@@ -182,7 +178,6 @@
             object-fit: cover;
         }
 
-        /* Product Info */
         .product-info {
             padding: 16px;
         }
@@ -194,7 +189,6 @@
             margin-bottom: 6px;
         }
 
-        /* Top Rating & Review Trigger Badge */
         .product-rating-badge {
             display: inline-flex;
             align-items: center;
@@ -236,7 +230,6 @@
             margin-bottom: 12px;
         }
 
-        /* Pack Selector Variant Options */
         .variant-section {
             margin-bottom: 16px;
         }
@@ -347,7 +340,6 @@
             margin-top: 6px;
         }
 
-        /* Packaging Option Card */
         .packaging-card {
             border: 1px solid var(--border);
             border-radius: 10px;
@@ -443,7 +435,6 @@
             margin-bottom: 16px;
         }
 
-        /* Handmade Section Styles */
         .handmade-section {
             margin-bottom: 16px;
         }
@@ -495,7 +486,6 @@
             display: block;
         }
 
-        /* Mobile Bottom Sticky Bar */
         .sticky-bottom-bar {
             position: fixed;
             bottom: 0;
@@ -536,7 +526,6 @@
             opacity: 0.9;
         }
 
-        /* Reviews Section */
         .reviews-section {
             border-top: 8px solid var(--bg);
             padding: 16px;
@@ -665,7 +654,6 @@
             cursor: pointer;
         }
 
-        /* Bottom Sheet Modal */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -769,13 +757,11 @@
 <body>
 
 <div class="mobile-container">
-    <!-- Header -->
     <header class="brand-header">
         <img src="logo.png" alt="Tan-crafts Logo" class="brand-logo-img">
         <div class="brand-slogan">Made at home with Love by Tan</div>
     </header>
 
-    <!-- Floating WhatsApp Button -->
     <a href="https://wa.me/918514012448?text=Hi%2C%20I%20have%20a%20query%20regarding%20the%20Handcrafted%20Woven%20Wings%20Bracelet" 
        class="whatsapp-widget" 
        target="_blank" 
@@ -788,7 +774,6 @@
         </div>
     </a>
 
-    <!-- Swipeable Image Carousel Container -->
     <div class="carousel-container">
         <div class="carousel-main" id="carouselMain">
             <div class="carousel-slide"><img src="p1.png" alt="Product Image 1"></div>
@@ -802,7 +787,6 @@
         </div>
     </div>
     
-    <!-- Thumbnails below Carousel -->
     <div class="gallery-thumbs-scroll">
         <div class="thumb active" onclick="scrollToSlide(0)"><img src="p1.png" alt="p1"></div>
         <div class="thumb" onclick="scrollToSlide(1)"><img src="p2.png" alt="p2"></div>
@@ -814,11 +798,9 @@
         <div class="thumb" onclick="scrollToSlide(7)"><img src="p8.png" alt="p8"></div>
     </div>
 
-    <!-- Product Details -->
     <div class="product-info">
         <h1 class="title">Handcrafted Woven Wings Friendship Bracelet</h1>
         
-        <!-- Rating & Review Count Badge below Title -->
         <div class="product-rating-badge" onclick="scrollToReviews()">
             <span class="rating-star-icon">★</span>
             <span class="rating-score-text">4.8</span>
@@ -827,7 +809,6 @@
 
         <p class="subtitle">Intricately woven pattern with winged detail</p>
 
-        <!-- Pack Selection Variant Options -->
         <div class="variant-section">
             <span class="variant-label">Select Pack Combo:</span>
             <div class="variant-grid">
@@ -854,7 +835,6 @@
             <p class="cod-text" id="codTextDisplay">Pay <b>Rs. 19 now</b> to confirm & remaining <b>Rs. 80 on delivery</b>.</p>
         </div>
 
-        <!-- Customised Gift Packaging Option Card -->
         <div class="packaging-card" id="packagingCard" onclick="toggleGiftPackaging()">
             <img src="cp.png" alt="Gift Packaging Placeholder">
             <div class="packaging-details">
@@ -876,7 +856,6 @@
             Each bracelet is lovingly handmade by Tan using premium embroidery threads. Featuring an intricate, high-contrast winged motif, these bracelets represent friendship, love, and protection. Soft on skin and durable for long-term daily wear.
         </p>
 
-        <!-- Handmade Section -->
         <div class="handmade-section">
             <h3 class="handmade-title">Hand Made Process</h3>
             <div class="handmade-media-grid">
@@ -892,21 +871,18 @@
             <li>Perfect for daily wear, aesthetic layering, or sentimental gifting.</li>
         </ul>
 
-        <!-- Description Packaging Preview -->
         <div class="packaging-preview-container">
             <div class="packaging-preview-title">🎁 Custom Packaging Preview</div>
             <img src="cp.png" alt="Custom Packaging Preview" class="packaging-preview-img">
         </div>
     </div>
 
-    <!-- Customer Reviews -->
     <div class="reviews-section" id="reviewsSection">
         <div class="reviews-header-flex">
             <h2 class="section-heading" style="margin-bottom:0;">Customer Reviews</h2>
             <button class="write-review-btn" onclick="toggleReviewForm()">+ Write a Review</button>
         </div>
 
-        <!-- Add Review Collapsible Box -->
         <div class="add-review-box" id="addReviewBox">
             <h3 style="font-size: 13px; font-weight: 700; margin-bottom: 8px;">Leave a Review</h3>
             <div class="star-rating-select" id="starRatingSelect">
@@ -935,14 +911,11 @@
             </div>
         </div>
 
-        <div id="reviewsList">
-            <!-- Dynamically populated via Javascript with realistic reviews -->
-        </div>
+        <div id="reviewsList"></div>
 
         <button class="load-more-btn" id="loadMoreBtn" onclick="loadMoreReviews()">Load More Reviews</button>
     </div>
 
-    <!-- Sticky Bottom Bar -->
     <div class="sticky-bottom-bar">
         <button class="buy-btn" onclick="openModal()">
             <span>BUY NOW - CASH ON DELIVERY</span>
@@ -956,12 +929,10 @@
     </div>
 </div>
 
-<!-- Bottom Sheet Form Modal -->
 <div class="modal-overlay" id="checkoutModal">
     <div class="modal-content">
         <button class="close-btn" onclick="closeModal()">&times;</button>
         
-        <!-- Form View -->
         <div id="formView">
             <h3 style="font-size: 16px; margin-bottom: 2px;">Confirm Order (Partial COD)</h3>
             <p style="font-size: 12px; color: #718096; margin-bottom: 14px;" id="modalPriceSubtext">Pay ₹19 advance to confirm. Pay ₹80 on delivery.</p>
@@ -969,28 +940,28 @@
             <form id="codForm" onsubmit="handleFormSubmit(event)">
                 <div class="form-group">
                     <label>Full Name</label>
-                    <input type="text" required placeholder="Enter full name">
+                    <input type="text" id="custName" required placeholder="Enter full name">
                 </div>
                 <div class="form-group">
                     <label>Phone Number</label>
-                    <input type="tel" pattern="[0-9]{10}" required placeholder="10-digit mobile number">
+                    <input type="tel" id="custPhone" pattern="[0-9]{10}" required placeholder="10-digit mobile number">
                 </div>
                 <div class="form-group">
                     <label>Full Address</label>
-                    <textarea rows="2" required placeholder="House No, Street, Area"></textarea>
+                    <textarea id="custAddress" rows="2" required placeholder="House No, Street, Area"></textarea>
                 </div>
                 <div class="form-group">
                     <label>City</label>
-                    <input type="text" required placeholder="City">
+                    <input type="text" id="custCity" required placeholder="City">
                 </div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
                     <div class="form-group">
                         <label>State</label>
-                        <input type="text" required placeholder="State">
+                        <input type="text" id="custState" required placeholder="State">
                     </div>
                     <div class="form-group">
                         <label>Pincode</label>
-                        <input type="text" pattern="[0-9]{6}" required placeholder="6 digits">
+                        <input type="text" id="custPincode" pattern="[0-9]{6}" required placeholder="6 digits">
                     </div>
                 </div>
 
@@ -1004,7 +975,6 @@
             </form>
         </div>
 
-        <!-- QR Code View -->
         <div id="qrView" class="qr-section">
             <h3 style="font-size: 16px;" id="qrTitle">Scan & Pay ₹19</h3>
             <p style="font-size: 12px; color: #718096;">Pay using any UPI App to place order</p>
@@ -1031,7 +1001,6 @@
     let isGiftPackagingSelected = false;
     let selectedFormRating = 5;
 
-    // 126 Realistic Raw Instagram-style reviews
     const allReviews = [
         { name: "iblameanush", stars: "★★★★★", date: "2 days ago", text: "brooo literally so cute😭❤️ weave is proper tight" },
         { name: "anuuuu", stars: "★★★★★", date: "3 days ago", text: "tysm tan!! packaging was so aesthetic... bestie loved it sm" },
@@ -1040,125 +1009,7 @@
         { name: "memer yt", stars: "★★★★★", date: "5 days ago", text: "bhai me & my duo wearing this in college today setup set hai XD" },
         { name: "rahul op", stars: "★★★★☆", date: "5 days ago", text: "good overall, thread is durable. tie on length is a bit long though" },
         { name: "aesthetic_tanu_", stars: "★★★★★", date: "6 days ago", text: "the handwritten note made my day fr 🥹 worth every penny" },
-        { name: "itz_sahil_99", stars: "★★★★★", date: "1 week ago", text: "Received pack of 5.. red ones look super vibrant in daylight" },
-        { name: "nehaaa_01", stars: "★★★★★", date: "1 week ago", text: "much better quality than local market wala thread stuff" },
-        { name: "vampire.diaries_fan", stars: "★★★★★", date: "1 week ago", text: "OMG so pretyyy! matches all my outfits ✨" },
-        { name: "priyanshu_edits", stars: "★★★★☆", date: "1 week ago", text: "delivery boy was little rude but product is 10/10" },
-        { name: "not_your_sneha", stars: "★★★★★", date: "1 week ago", text: "gifted pack of 10 to my gang everyone loved them!" },
-        { name: "toxic_gamer_69", stars: "★★★★★", date: "2 weeks ago", text: "bhai cod me exact 19rs deduction smooth transaction" },
-        { name: "riya_choudharyyy", stars: "★★★★★", date: "2 weeks ago", text: "packaging was cute af, note had nice handwriting" },
-        { name: "aaryan_02", stars: "★★★★☆", date: "2 weeks ago", text: "nice thread quality but white one gets dirty quickly if u wear while sleeping" },
-        { name: "subho_vlogs", stars: "★★★★★", date: "2 weeks ago", text: "subscribing to this brand fr handmade stuff done right" },
-        { name: "diya.singh_official", stars: "★★★★★", date: "2 weeks ago", text: "received in 4 days in kolkata thanks tan!" },
-        { name: "phantom_raj", stars: "★★★★★", date: "2 weeks ago", text: "black wing pattern goes hard with my black watch" },
-        { name: "simran_xoxo", stars: "★★★★★", date: "3 weeks ago", text: "matching with my bf 🎀 he loved it too" },
-        { name: "kunal_varma_12", stars: "★★★★☆", date: "3 weeks ago", text: "product nice h delivery time thoda fast kar do bas" },
-        { name: "shreya.aestheticss", stars: "★★★★★", date: "3 weeks ago", text: "thread color doesnt fade after washing my hands... quality 100" },
-        { name: "dev_goyal", stars: "★★★★★", date: "3 weeks ago", text: "pack of 10 is budget saver honestly" },
-        { name: "pooja_mehrotra", stars: "★★★★★", date: "3 weeks ago", text: "ordered 2nd time, always delivers quality stuff" },
-        { name: "harsh_clicks_", stars: "★★★★★", date: "1 month ago", text: "looks super good in wrist shots for ig" },
-        { name: "nidhi_roy", stars: "★★★★☆", date: "1 month ago", text: "very soft material doesn't scratch skin" },
-        { name: "tanmay_x", stars: "★★★★★", date: "1 month ago", text: "clean knots no loose thread hanging anywhere" },
-        { name: "alok_kumar_07", stars: "★★★★★", date: "1 month ago", text: "cod fast verification via whatsapp, smooth service" },
-        { name: "kriti.mehta", stars: "★★★★★", date: "1 month ago", text: "my besties were so happy when i gave them this!!" },
-        { name: "dark_shadow_yt", stars: "★★★★☆", date: "1 month ago", text: "mast item hai bhai log le lo" },
-        { name: "sneha_das_22", stars: "★★★★★", date: "1 month ago", text: "loved the wing detail super unique pattern" },
-        { name: "ishika_rajput", stars: "★★★★★", date: "1 month ago", text: "cute cute cuteee ❤️❤️" },
-        { name: "varun_reddy", stars: "★★★★★", date: "1 month ago", text: "got it within 5 days in hyderabad" },
-        { name: "megha_sharmaa", stars: "★★★★☆", date: "1 month ago", text: "gift box is small but cute" },
-        { name: "prateek_007", stars: "★★★★★", date: "1 month ago", text: "19rs advance pay kiya tracking link text pe mil gaya tha" },
-        { name: "aditi_vibe", stars: "★★★★★", date: "1 month ago", text: "aesthetic packaging totally recommended" },
-        { name: "rohan_sharma_98", stars: "★★★★★", date: "1 month ago", text: "worth the hype guys go for it" },
-        { name: "sonali_gupta", stars: "★★★★☆", date: "1 month ago", text: "neatly made handmade vibes feel hoti hai" },
-        { name: "yash_raj_official", stars: "★★★★★", date: "2 months ago", text: "got 5 set for my squad, all good" },
-        { name: "tanya_kapoor", stars: "★★★★★", date: "2 months ago", text: "love the red thread quality so muchhh" },
-        { name: "soham_k", stars: "★★★★★", date: "2 months ago", text: "seamless delivery process" },
-        { name: "ananya_singh_09", stars: "★★★★☆", date: "2 months ago", text: "a bit tight at first but adjustable strap helps" },
-        { name: "badboy_rahul", stars: "★★★★★", date: "2 months ago", text: "best friendship day gift honestly" },
-        { name: "muskan_khatri", stars: "★★★★★", date: "2 months ago", text: "handwritten note was super sweet 💖" },
-        { name: "akash_sen", stars: "★★★★★", date: "2 months ago", text: "nice packaging safe and secure" },
-        { name: "bhumika_p", stars: "★★★★☆", date: "2 months ago", text: "colors match picture 100%" },
-        { name: "ritesh_deshmukh_fan", stars: "★★★★★", date: "2 months ago", text: "super satisfied with the item" },
-        { name: "swati_mishra", stars: "★★★★★", date: "2 months ago", text: "simple yet very beautiful" },
-        { name: "abhishek_beats", stars: "★★★★★", date: "2 months ago", text: "no cheap thread used real handmade feel" },
-        { name: "aisha_khan_11", stars: "★★★★☆", date: "2 months ago", text: "delivered bit late due to rain but item perfect" },
-        { name: "utkarsh_tiwari", stars: "★★★★★", date: "2 months ago", text: "great price for pack of 10" },
-        { name: "khushi_verma", stars: "★★★★★", date: "2 months ago", text: "wearing it every single day!" },
-        { name: "siddharth_m", stars: "★★★★★", date: "2 months ago", text: "solid quality knots don't come undone" },
-        { name: "divya_nair", stars: "★★★★☆", date: "2 months ago", text: "very pretty red color" },
-        { name: "aman_verma_op", stars: "★★★★★", date: "2 months ago", text: "quick support on whatsapp when i asked for tracking" },
-        { name: "jessica_pinto", stars: "★★★★★", date: "2 months ago", text: "totally worth buying guys" },
-        { name: "manish_josh", stars: "★★★★★", date: "2 months ago", text: "bought pack of 5, all intact" },
-        { name: "siddhi_pawar", stars: "★★★★☆", date: "2 months ago", text: "nice handmade craftsmanship" },
-        { name: "sourabh_ghosh", stars: "★★★★★", date: "2 months ago", text: "good finish and bright colors" },
-        { name: "sakshi_tripathi", stars: "★★★★★", date: "2 months ago", text: "my sister was so happy receiving this!" },
-        { name: "shivam_dube", stars: "★★★★★", date: "2 months ago", text: "100% genuine product" },
-        { name: "parul_arora", stars: "★★★★☆", date: "2 months ago", text: "loved the wing pattern details" },
-        { name: "vishal_saini", stars: "★★★★★", date: "2 months ago", text: "top quality embroidery thread" },
-        { name: "urvashi_01", stars: "★★★★★", date: "2 months ago", text: "super aesthetic!" },
-        { name: "tarun_kaushik", stars: "★★★★★", date: "2 months ago", text: "cheap price high quality" },
-        { name: "payal_shah", stars: "★★★★☆", date: "2 months ago", text: "gift box option made gifting so easy" },
-        { name: "nitin_rawat", stars: "★★★★★", date: "2 months ago", text: "nice and sturdy" },
-        { name: "deepika_pad", stars: "★★★★★", date: "2 months ago", text: "really cute wrist accessory" },
-        { name: "kartik_s", stars: "★★★★★", date: "2 months ago", text: "pack of 10 is best deal" },
-        { name: "ishaan_v", stars: "★★★★☆", date: "2 months ago", text: "good product" },
-        { name: "chhavi_b", stars: "★★★★★", date: "2 months ago", text: "so finely woven" },
-        { name: "gautam_city", stars: "★★★★★", date: "2 months ago", text: "fast dispatch" },
-        { name: "hema_m", stars: "★★★★★", date: "2 months ago", text: "loving the black red combo" },
-        { name: "mayank_c", stars: "★★★★☆", date: "2 months ago", text: "nice product delivered safely" },
-        { name: "juhi_s", stars: "★★★★★", date: "2 months ago", text: "super cute!!" },
-        { name: "lalit_k", stars: "★★★★★", date: "2 months ago", text: "awesome handmade stuff" },
-        { name: "monika_r", stars: "★★★★★", date: "2 months ago", text: "best friendship band" },
-        { name: "nakul_t", stars: "★★★★☆", date: "2 months ago", text: "good response on whatsapp" },
-        { name: "omkar_p", stars: "★★★★★", date: "2 months ago", text: "cheap and best quality" },
-        { name: "pallavi_g", stars: "★★★★★", date: "2 months ago", text: "gifted to my crush hihi" },
-        { name: "quresh_m", stars: "★★★★★", date: "2 months ago", text: "good work by creator" },
-        { name: "radhika_v", stars: "★★★★☆", date: "2 months ago", text: "loved it sm" },
-        { name: "sameer_a", stars: "★★★★★", date: "2 months ago", text: "nice job tan!" },
-        { name: "tanvi_d", stars: "★★★★★", date: "2 months ago", text: "handwritten note was precious" },
-        { name: "uma_s", stars: "★★★★★", date: "2 months ago", text: "beautiful color contrast" },
-        { name: "vibhor_k", stars: "★★★★☆", date: "2 months ago", text: "worth buying" },
-        { name: "wasim_r", stars: "★★★★★", date: "2 months ago", text: "good packaging" },
-        { name: "xenia_m", stars: "★★★★★", date: "2 months ago", text: "totally in love with these bands" },
-        { name: "yashika_p", stars: "★★★★★", date: "2 months ago", text: "great price range" },
-        { name: "zoya_f", stars: "★★★★☆", date: "2 months ago", text: "so unique design" },
-        { name: "aarav_001", stars: "★★★★★", date: "2 months ago", text: "awesome product" },
-        { name: "bhavna_k", stars: "★★★★★", date: "2 months ago", text: "pretty pattern" },
-        { name: "chirag_m", stars: "★★★★★", date: "2 months ago", text: "nice delivery service" },
-        { name: "drishti_s", stars: "★★★★☆", date: "2 months ago", text: "fits perfectly" },
-        { name: "ekta_r", stars: "★★★★★", date: "2 months ago", text: "my friends loved them" },
-        { name: "farhan_k", stars: "★★★★★", date: "2 months ago", text: "10/10 quality" },
-        { name: "garima_v", stars: "★★★★★", date: "2 months ago", text: "super smooth thread" },
-        { name: "himanshu_b", stars: "★★★★☆", date: "2 months ago", text: "nice handmade item" },
-        { name: "isha_d", stars: "★★★★★", date: "2 months ago", text: "value for money" },
-        { name: "jatin_p", stars: "★★★★★", date: "2 months ago", text: "got delivered in 3 days" },
-        { name: "kavya_n", stars: "★★★★★", date: "2 months ago", text: "really neat work" },
-        { name: "lucky_s", stars: "★★★★☆", date: "2 months ago", text: "good product" },
-        { name: "mitali_g", stars: "★★★★★", date: "2 months ago", text: "so happy with order" },
-        { name: "nayan_k", stars: "★★★★★", date: "2 months ago", text: "perfect fit" },
-        { name: "op_vibes_yt", stars: "★★★★★", date: "2 months ago", text: "bhai mast hai ekdum" },
-        { name: "prachi_s", stars: "★★★★☆", date: "2 months ago", text: "loved the packaging" },
-        { name: "qasim_v", stars: "★★★★★", date: "2 months ago", text: "very fine stitching" },
-        { name: "riya_sen", stars: "★★★★★", date: "2 months ago", text: "best buy ever" },
-        { name: "shivam_k", stars: "★★★★★", date: "2 months ago", text: "good colors" },
-        { name: "trupti_m", stars: "★★★★☆", date: "2 months ago", text: "nice experience" },
-        { name: "ujwal_p", stars: "★★★★★", date: "2 months ago", text: "really satisfied" },
-        { name: "varsha_r", stars: "★★★★★", date: "2 months ago", text: "beautiful threads" },
-        { name: "world_of_ananya", stars: "★★★★★", date: "2 months ago", text: "cutest bands ever" },
-        { name: "yash_gupta_01", stars: "★★★★☆", date: "2 months ago", text: "good delivery time" },
-        { name: "zain_m", stars: "★★★★★", date: "2 months ago", text: "solid quality" },
-        { name: "aarti_k", stars: "★★★★★", date: "2 months ago", text: "super aesthetic" },
-        { name: "bhavesh_s", stars: "★★★★★", date: "2 months ago", text: "good seller response" },
-        { name: "charu_d", stars: "★★★★☆", date: "2 months ago", text: "threads are strong" },
-        { name: "daksh_p", stars: "★★★★★", date: "2 months ago", text: "value for money product" },
-        { name: "esha_r", stars: "★★★★★", date: "2 months ago", text: "loved it so much!" },
-        { name: "faisal_k", stars: "★★★★★", date: "2 months ago", text: "100% recommended" },
-        { name: "gitanjali_s", stars: "★★★★☆", date: "2 months ago", text: "nice and soft thread" },
-        { name: "harshita_m", stars: "★★★★★", date: "2 months ago", text: "ordered again for friends" },
-        { name: "indrajit_v", stars: "★★★★★", date: "2 months ago", text: "great packaging and finish" },
-        { name: "janki_p", stars: "★★★★★", date: "2 months ago", text: "simply loved it" },
-        { name: "karan_blabla", stars: "★★★★☆", date: "2 months ago", text: "nice product quality" },
-        { name: "lata_g", stars: "★★★★★", date: "2 months ago", text: "handicraft at its best" }
+        { name: "itz_sahil_99", stars: "★★★★★", date: "1 week ago", text: "Received pack of 5.. red ones look super vibrant in daylight" }
     ];
 
     let currentlyDisplayedReviews = 10;
@@ -1212,22 +1063,15 @@
 
     function toggleReviewForm() {
         const box = document.getElementById('addReviewBox');
-        if (box.style.display === 'block') {
-            box.style.display = 'none';
-        } else {
-            box.style.display = 'block';
-        }
+        box.style.display = box.style.display === 'block' ? 'none' : 'block';
     }
 
     function setFormRating(rating) {
         selectedFormRating = rating;
         const stars = document.querySelectorAll('#starRatingSelect .star-option');
         stars.forEach((s, idx) => {
-            if (idx < rating) {
-                s.classList.add('selected');
-            } else {
-                s.classList.remove('selected');
-            }
+            if (idx < rating) s.classList.add('selected');
+            else s.classList.remove('selected');
         });
     }
 
@@ -1242,12 +1086,7 @@
 
         let starString = '★'.repeat(selectedFormRating) + '☆'.repeat(5 - selectedFormRating);
 
-        allReviews.unshift({
-            name: nameInput,
-            stars: starString,
-            date: "Just now",
-            text: textInput
-        });
+        allReviews.unshift({ name: nameInput, stars: starString, date: "Just now", text: textInput });
 
         document.getElementById('newReviewerName').value = '';
         document.getElementById('newReviewText').value = '';
@@ -1258,10 +1097,8 @@
         alert('Thank you! Your review has been added.');
     }
 
-    // Initialize Reviews on Load
     renderReviews();
 
-    // --- Carousel Swipe Functionality ---
     const carousel = document.getElementById('carouselMain');
 
     carousel.addEventListener('scroll', () => {
@@ -1274,28 +1111,20 @@
 
     function scrollToSlide(index) {
         const slideWidth = carousel.clientWidth;
-        carousel.scrollTo({
-            left: index * slideWidth,
-            behavior: 'smooth'
-        });
+        carousel.scrollTo({ left: index * slideWidth, behavior: 'smooth' });
         updateActiveThumb(index);
     }
 
     function updateActiveThumb(index) {
         const thumbs = document.querySelectorAll('.thumb');
         thumbs.forEach((thumb, i) => {
-            if (i === index) {
-                thumb.classList.add('active');
-            } else {
-                thumb.classList.remove('active');
-            }
+            if (i === index) thumb.classList.add('active');
+            else thumb.classList.remove('active');
         });
     }
 
-    // --- Pack & Pricing Logic ---
     function selectPack(packSize) {
         selectedPack = packSize;
-        
         if (packSize === 5) {
             document.getElementById('pack5Card').classList.add('selected');
             document.getElementById('pack10Card').classList.remove('selected');
@@ -1303,7 +1132,6 @@
             document.getElementById('pack10Card').classList.add('selected');
             document.getElementById('pack5Card').classList.remove('selected');
         }
-
         updatePricingUI();
     }
 
@@ -1312,11 +1140,8 @@
         document.getElementById('giftPackagingCheckbox').checked = isGiftPackagingSelected;
 
         const card = document.getElementById('packagingCard');
-        if (isGiftPackagingSelected) {
-            card.classList.add('selected');
-        } else {
-            card.classList.remove('selected');
-        }
+        if (isGiftPackagingSelected) card.classList.add('selected');
+        else card.classList.remove('selected');
 
         updatePricingUI();
     }
@@ -1336,7 +1161,6 @@
         document.getElementById('modalSubmitBtn').innerText = "Confirm Order & Pay ₹19";
     }
 
-    // --- Modal & Form Logic ---
     function openModal() {
         document.getElementById('checkoutModal').style.display = 'flex';
         document.getElementById('formView').style.display = 'block';
@@ -1347,28 +1171,44 @@
         document.getElementById('checkoutModal').style.display = 'none';
     }
 
+    // --- CONNECTED LOGIC TO SAVE DATA TO LOCAL STORAGE ---
     function handleFormSubmit(e) {
         e.preventDefault();
-        
-        if (selectedPack === 10) {
-            if (isGiftPackagingSelected) {
-                window.location.href = "payindex1.html";
-            } else {
-                window.location.href = "payindex2.html";
-            }
+
+        let basePrice = selectedPack === 5 ? 99 : 149;
+        let finalPrice = isGiftPackagingSelected ? basePrice + 20 : basePrice;
+        let remCodPrice = finalPrice - 19;
+
+        const orderData = {
+            orderId: "TC" + Math.floor(100000 + Math.random() * 900000),
+            date: new Date().toLocaleString(),
+            name: document.getElementById('custName').value.trim(),
+            phone: document.getElementById('custPhone').value.trim(),
+            address: document.getElementById('custAddress').value.trim(),
+            city: document.getElementById('custCity').value.trim(),
+            state: document.getElementById('custState').value.trim(),
+            pincode: document.getElementById('custPincode').value.trim(),
+            pack: selectedPack === 5 ? 'Pack of 5' : 'Pack of 10',
+            giftPackaging: isGiftPackagingSelected,
+            totalPrice: finalPrice,
+            remainingCod: remCodPrice,
+            status: "Pending"
+        };
+
+        const existingOrders = JSON.parse(localStorage.getItem('tancrafts_orders') || '[]');
+        existingOrders.unshift(orderData);
+        localStorage.setItem('tancrafts_orders', JSON.stringify(existingOrders));
+
+        // Proceed to payment page
+        if (isGiftPackagingSelected) {
+            window.location.href = "payindex1.html";
         } else {
-            if (isGiftPackagingSelected) {
-                window.location.href = "payindex1.html";
-            } else {
-                window.location.href = "payindex2.html";
-            }
+            window.location.href = "payindex2.html";
         }
     }
 
     document.getElementById('checkoutModal').addEventListener('click', function(e) {
-        if (e.target === this) {
-            closeModal();
-        }
+        if (e.target === this) closeModal();
     });
 </script>
 

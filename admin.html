@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tan-crafts Admin Dashboard</title>
+    <style>
+        :root {
+            --primary: #d9383a;
+            --bg: #f4f5f7;
+            --card: #ffffff;
+            --text: #1a1a1a;
+            --border: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            background: var(--card);
+            padding: 16px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .title-area h1 {
+            font-size: 20px;
+            color: var(--primary);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: var(--card);
+            padding: 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .stat-card h3 {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        .stat-card .value {
+            font-size: 22px;
+            font-weight: 700;
+            margin-top: 6px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .controls input, .controls select {
+            padding: 8px 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .btn-secondary {
+            background: #4a5568;
+        }
+
+        .btn-danger {
+            background: #e53e3e;
+        }
+
+        .table-wrapper {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 13px;
+        }
+
+        th, td {
+            padding: 12px 14px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        th {
+            background: #f7fafc;
+            font-weight: 700;
+            color: #4a5568;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .status-pending { background: #fefcbf; color: #744210; }
+        .status-confirmed { background: #c6f6d5; color: #22543d; }
+        .status-shipped { background: #bee3f8; color: #2b6cb0; }
+
+        .address-box {
+            max-width: 220px;
+            line-height: 1.4;
+            color: #4a5568;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <div class="title-area">
+            <h1>Tan-crafts Customer Orders</h1>
+            <p style="font-size: 12px; color: #666;">Store Order Data & Management Panel</p>
+        </div>
+        <div>
+            <button class="btn btn-secondary" onclick="exportToCSV()">Export CSV</button>
+            <button class="btn btn-danger" onclick="clearAllOrders()">Clear Data</button>
+        </div>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>Total Orders</h3>
+            <div class="value" id="statTotalOrders">0</div>
+        </div>
+        <div class="stat-card">
+            <h3>Advance Collected (₹19)</h3>
+            <div class="value" id="statAdvanceTotal">₹0</div>
+        </div>
+        <div class="stat-card">
+            <h3>Remaining COD Total</h3>
+            <div class="value" id="statCodTotal">₹0</div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <input type="text" id="searchInput" placeholder="Search name or phone..." onkeyup="renderOrders()">
+        <select id="filterPack" onchange="renderOrders()">
+            <option value="all">All Packs</option>
+            <option value="Pack of 5">Pack of 5</option>
+            <option value="Pack of 10">Pack of 10</option>
+        </select>
+    </div>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Order ID / Date</th>
+                    <th>Customer Name</th>
+                    <th>Phone</th>
+                    <th>Shipping Address</th>
+                    <th>Item Details</th>
+                    <th>Price Breakdown</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="ordersTableBody">
+                <!-- Dynamically populated -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function getOrders() {
+        return JSON.parse(localStorage.getItem('tancrafts_orders') || '[]');
+    }
+
+    function saveOrders(orders) {
+        localStorage.setItem('tancrafts_orders', JSON.stringify(orders));
+    }
+
+    function renderOrders() {
+        const orders = getOrders();
+        const tbody = document.getElementById('ordersTableBody');
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        const packFilter = document.getElementById('filterPack').value;
+
+        tbody.innerHTML = '';
+
+        let totalAdvance = 0;
+        let totalCod = 0;
+        let visibleCount = 0;
+
+        orders.forEach((ord, index) => {
+            const matchesSearch = ord.name.toLowerCase().includes(searchTerm) || ord.phone.includes(searchTerm);
+            const matchesPack = packFilter === 'all' || ord.pack === packFilter;
+
+            if (matchesSearch && matchesPack) {
+                visibleCount++;
+                totalAdvance += 19;
+                totalCod += ord.remainingCod;
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>
+                        <b>${ord.orderId}</b><br>
+                        <span style="font-size:11px; color:#718096;">${ord.date}</span>
+                    </td>
+                    <td><b>${ord.name}</b></td>
+                    <td><a href="tel:${ord.phone}">${ord.phone}</a></td>
+                    <td>
+                        <div class="address-box">
+                            ${ord.address}, ${ord.city}, ${ord.state} - <b>${ord.pincode}</b>
+                        </div>
+                    </td>
+                    <td>
+                        <b>${ord.pack}</b><br>
+                        <span style="font-size:11px; color:#718096;">Gift Pack: ${ord.giftPackaging ? 'Yes (+₹20)' : 'No'}</span>
+                    </td>
+                    <td>
+                        Total: <b>Rs. ${ord.totalPrice}</b><br>
+                        <span style="font-size:11px; color:#276749;">Paid Advance: ₹19</span><br>
+                        <span style="font-size:11px; color:#c53030;">COD Pending: ₹${ord.remainingCod}</span>
+                    </td>
+                    <td>
+                        <select onchange="updateStatus(${index}, this.value)">
+                            <option value="Pending" ${ord.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                            <option value="Confirmed" ${ord.status === 'Confirmed' ? 'selected' : ''}>Confirmed</option>
+                            <option value="Shipped" ${ord.status === 'Shipped' ? 'selected' : ''}>Shipped</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" style="padding: 4px 8px; font-size: 11px;" onclick="deleteOrder(${index})">Delete</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            }
+        });
+
+        document.getElementById('statTotalOrders').innerText = visibleCount;
+        document.getElementById('statAdvanceTotal').innerText = '₹' + totalAdvance;
+        document.getElementById('statCodTotal').innerText = '₹' + totalCod;
+    }
+
+    function updateStatus(index, newStatus) {
+        const orders = getOrders();
+        orders[index].status = newStatus;
+        saveOrders(orders);
+    }
+
+    function deleteOrder(index) {
+        if (confirm("Delete this order entry?")) {
+            const orders = getOrders();
+            orders.splice(index, 1);
+            saveOrders(orders);
+            renderOrders();
+        }
+    }
+
+    function clearAllOrders() {
+        if (confirm("Are you sure you want to delete ALL customer order records?")) {
+            localStorage.removeItem('tancrafts_orders');
+            renderOrders();
+        }
+    }
+
+    function exportToCSV() {
+        const orders = getOrders();
+        if (orders.length === 0) {
+            alert("No data available to export.");
+            return;
+        }
+
+        let csv = "Order ID,Date,Name,Phone,Address,City,State,Pincode,Pack,Gift Packaging,Total Price,Advance Paid,Remaining COD,Status\n";
+        orders.forEach(o => {
+            csv += `"${o.orderId}","${o.date}","${o.name}","${o.phone}","${o.address.replace(/"/g, '""')}","${o.city}","${o.state}","${o.pincode}","${o.pack}","${o.giftPackaging ? 'Yes' : 'No'}","${o.totalPrice}","19","${o.remainingCod}","${o.status}"\n`;
+        });
+
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.setAttribute('href', url);
+        a.setAttribute('download', 'tancrafts_customer_orders.csv');
+        a.click();
+    }
+
+    renderOrders();
+</script>
+
+</body>
+</html>
